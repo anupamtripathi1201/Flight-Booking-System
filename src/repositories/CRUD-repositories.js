@@ -1,4 +1,6 @@
 const { Logger } =  require('../config');
+const AppError = require('../utils/Error/app-error');
+const { StatusCodes } = require('http-status-codes');
 
 class CrudRepositories{
     constructor(model){
@@ -19,7 +21,10 @@ class CrudRepositories{
                 where : {
                     id : data
                 }
-            });
+            })
+            if(!response){
+                throw new AppError('Cannot get the object',StatusCodes.NOT_FOUND);
+            };
         } catch (error) {
             Logger.error("Something went wrong in Crud Repo : Destroy");
             throw error;
@@ -29,26 +34,20 @@ class CrudRepositories{
 
 
     async get(data){
-        try {
+    
             const response = await this.model.findByPk(data);
+            if(!response){
+                throw new AppError('Cannot get the object',StatusCodes.NOT_FOUND);
+            }
             return response;
-        } catch (error) {
-            Logger.error("Something went wrong in Crud Repo : Get");
-            throw error;
-            
-        }
     }
 
 
     async getAll(){
-        try {
+    
             const response = await this.model.findAll();
             return response;
-        } catch (error) {
-            Logger.error("Something went wrong in Crud Repo : Get All");
-            throw error;
-            
-        }
+     
     }
 
     async update(id,data){

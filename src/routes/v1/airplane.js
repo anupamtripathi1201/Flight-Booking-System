@@ -14,6 +14,12 @@ AirplaneController.createAirplane);
 
 //get request for v1/airplanes
 
-route.get('/',AirplaneController.getAirplane)
+route.get('/',AirplaneController.getAirplanes);
+
+route.get('/:id',AirplaneController.getAirplane);
+
+//Delete request
+
+route.get('/:id',AirplaneController.deleteAirplane);
 
 module.exports = route;
