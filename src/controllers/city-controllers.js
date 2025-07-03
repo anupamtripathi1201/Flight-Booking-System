@@ -32,7 +32,24 @@ async function createCity(req,res){
     }
 }
 
+async function deleteCity(req,res){
+    try {
+        const response =await  CityService.deleteCity(req.params.id);
+        SuccessResponse.data = response;
+        return res.status(StatusCodes.OK).json(SuccessResponse);
+    } catch (error) {
+              
+        ErrorResponse.message = "Something went wrong while deleting City";
+
+        ErrorResponse.error = error;
+        res.status(StatusCodes.INTERNAL_SERVER_ERROR).json(ErrorResponse);
+
+        
+    }
+}
+
 module.exports = {
-    createCity
+    createCity,
+    deleteCity
 }
 
