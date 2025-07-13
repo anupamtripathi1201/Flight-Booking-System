@@ -60,6 +60,14 @@ function validateUpdateRequest(req,res,next){
         res.status(StatusCodes.BAD_REQUEST).json(ErrorResponse
          )
     }
+
+    const { seats, dec } = req.body;
+    if (typeof seats !== 'number' || seats <= 0) {
+        return res.status(400).json({ message: "Invalid seats value" });
+    }
+    if (typeof dec !== 'boolean') {
+        return res.status(400).json({ message: "Invalid dec value" });
+    }
     next();
 
 

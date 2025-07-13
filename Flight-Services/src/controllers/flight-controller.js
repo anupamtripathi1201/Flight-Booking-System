@@ -74,7 +74,7 @@ async function getFlight(req,res){
         console.log(error);
     }
 }
-async function updateReaminingSeats(req,res){
+async function updateRemainingSeats(req,res){
     try {
         const response = await FlightService.updateSeats({
             flightId : req.params.id,
@@ -84,10 +84,11 @@ async function updateReaminingSeats(req,res){
         SuccessResponse.data = response;
         return  res.status(StatusCodes.CREATED).json(SuccessResponse);
     } catch (error) {
-       console.log(error);
+        console.log(error);
         ErrorResponse.message = "Something went wrong while updating flight";
         ErrorResponse.error = error;
         res.status(StatusCodes.INTERNAL_SERVER_ERROR).json(ErrorResponse);
+      
         
     }
 }
@@ -98,5 +99,5 @@ module.exports = {
     createFlight,
     getAllFlight,
     getFlight,
-    updateReaminingSeats
+    updateRemainingSeats
 }

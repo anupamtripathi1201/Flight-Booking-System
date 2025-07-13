@@ -15,7 +15,7 @@ route.get('/',FlightController.getAllFlight);
 route.get('/:id',FlightController.getFlight);
 
 //PATCH REQUEST
-route.patch('/:id/seats',FlightMiddlewares.validateUpdateRequest,FlightController.updateReaminingSeats)
+route.patch('/:id/seats',FlightMiddlewares.validateUpdateRequest,FlightController.updateRemainingSeats)
 
 module.exports = route;
 
